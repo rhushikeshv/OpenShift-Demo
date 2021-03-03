@@ -1,0 +1,116 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: '2021-01-08T13:14:25Z'
+  generation: 33
+  labels:
+    app: whitepaperopenshift
+  name: whitepaperopenshift
+  namespace: whitepaperopenshift
+  resourceVersion: '565115'
+  selfLink: >-
+    /apis/apps.openshift.io/v1/namespaces/whitepaperopenshift/deploymentconfigs/whitepaperopenshift
+  uid: 6e09fcfc-51b3-11eb-898f-080027d1760f
+spec:
+  replicas: 1
+  selector:
+    deploymentconfig: whitepaperopenshift
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: whitepaperopenshift
+        deploymentconfig: whitepaperopenshift
+    spec:
+      containers:
+        - image: >-
+            172.30.1.1:5000/whitepaperopenshift/whitepaperopenshift@sha256:bfdb1d1c5f3ae64380649e910327e4025a066f661260675b9c9a7b4706e24eb6
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /index.html
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
+          name: whitepaperopenshift
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /index.html
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources:
+            limits:
+              cpu: 500m
+              memory: 2G
+            requests:
+              cpu: 200m
+              memory: 1G
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - whitepaperopenshift
+        from:
+          kind: ImageStreamTag
+          name: 'whitepaperopenshift:latest'
+          namespace: whitepaperopenshift
+        lastTriggeredImage: >-
+          172.30.1.1:5000/whitepaperopenshift/whitepaperopenshift@sha256:bfdb1d1c5f3ae64380649e910327e4025a066f661260675b9c9a7b4706e24eb6
+      type: ImageChange
+    - type: ConfigChange
+status:
+  availableReplicas: 1
+  conditions:
+    - lastTransitionTime: '2021-02-08T14:27:26Z'
+      lastUpdateTime: '2021-02-08T14:27:26Z'
+      message: replication controller "whitepaperopenshift-12" successfully rolled out
+      reason: NewReplicationControllerAvailable
+      status: 'True'
+      type: Progressing
+    - lastTransitionTime: '2021-03-03T12:52:37Z'
+      lastUpdateTime: '2021-03-03T12:52:37Z'
+      message: Deployment config has minimum availability.
+      status: 'True'
+      type: Available
+  details:
+    causes:
+      - type: Manual
+    message: manual change
+  latestVersion: 12
+  observedGeneration: 33
+  readyReplicas: 1
+  replicas: 1
+  unavailableReplicas: 0
+  updatedReplicas: 1

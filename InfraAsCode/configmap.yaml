@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  AUTHORIZATION: 'https://sso.hcl.com'
+  DB: whitepaper_db_production
+  DB_PORT: '1521'
+  DB_SERVER: pcdatabase.hcl.com
+kind: ConfigMap
+metadata:
+  creationTimestamp: '2021-02-05T08:47:55Z'
+  name: whitepaperopenshift-prod
+  namespace: whitepaperopenshift
+  resourceVersion: '513778'
+  selfLink: /api/v1/namespaces/whitepaperopenshift/configmaps/whitepaperopenshift-prod
+  uid: d73ace97-678e-11eb-a03e-080027d1760f

@@ -1,0 +1,65 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: '2021-01-08T13:14:25Z'
+  labels:
+    app: whitepaperopenshift
+  name: whitepaperopenshift
+  namespace: whitepaperopenshift
+  resourceVersion: '515096'
+  selfLink: >-
+    /apis/build.openshift.io/v1/namespaces/whitepaperopenshift/buildconfigs/whitepaperopenshift
+  uid: 6e0c6323-51b3-11eb-898f-080027d1760f
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'whitepaperopenshift:latest'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: master
+      uri: 'https://github.com/rhushikeshv/OpenShift-Demo.git'
+    type: Git
+  strategy:
+    sourceStrategy:
+      env:
+        - name: DB
+          valueFrom:
+            configMapKeyRef:
+              key: DB
+              name: whitepaperopenshift-prod
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              key: DB_USER
+              name: whitepaperopenshift-secret
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: DB_PASSWORD
+              name: whitepaperopenshift-secret
+      from:
+        kind: ImageStreamTag
+        name: 'wildfly:13.0'
+        namespace: openshift
+    type: Source
+  triggers:
+    - imageChange:
+        lastTriggeredImageID: >-
+          172.30.1.1:5000/openshift/wildfly@sha256:73b9d5578eac447606e708a635bc0661755866162673a4c6e6d1119248d3c2c8
+      type: ImageChange
+    - type: ConfigChange
+    - generic:
+        secret: cb3693332bafbfca
+      type: Generic
+    - github:
+        secret: 2e0d3efd005e4419
+      type: GitHub
+status:
+  lastVersion: 1

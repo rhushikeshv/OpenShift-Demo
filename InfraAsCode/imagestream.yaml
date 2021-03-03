@@ -1,0 +1,29 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: '2021-01-08T13:14:25Z'
+  generation: 1
+  labels:
+    app: whitepaperopenshift
+  name: whitepaperopenshift
+  namespace: whitepaperopenshift
+  resourceVersion: '274615'
+  selfLink: >-
+    /apis/image.openshift.io/v1/namespaces/whitepaperopenshift/imagestreams/whitepaperopenshift
+  uid: 6e094068-51b3-11eb-898f-080027d1760f
+spec:
+  lookupPolicy:
+    local: false
+status:
+  dockerImageRepository: '172.30.1.1:5000/whitepaperopenshift/whitepaperopenshift'
+  tags:
+    - items:
+        - created: '2021-01-08T13:16:16Z'
+          dockerImageReference: >-
+            172.30.1.1:5000/whitepaperopenshift/whitepaperopenshift@sha256:bfdb1d1c5f3ae64380649e910327e4025a066f661260675b9c9a7b4706e24eb6
+          generation: 1
+          image: >-
+            sha256:bfdb1d1c5f3ae64380649e910327e4025a066f661260675b9c9a7b4706e24eb6
+      tag: latest

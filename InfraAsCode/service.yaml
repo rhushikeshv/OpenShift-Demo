@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: '2021-01-08T13:14:25Z'
+  labels:
+    app: whitepaperopenshift
+  name: whitepaperopenshift
+  namespace: whitepaperopenshift
+  resourceVersion: '541270'
+  selfLink: /api/v1/namespaces/whitepaperopenshift/services/whitepaperopenshift
+  uid: 6e088fa2-51b3-11eb-9434-080027d1760f
+spec:
+  clusterIP: 172.30.25.167
+  ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    deploymentconfig: whitepaperopenshift
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
